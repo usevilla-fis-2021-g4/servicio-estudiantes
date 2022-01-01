@@ -1,0 +1,4 @@
+deploy:
+ - okteto build -t okteto.dev/authentication-service:${OKTETO_GIT_COMMIT} .
+ - helm upgrade --install mongodb charts/mongodb/
+ - helm upgrade --install authentication-service charts/chart/ --set image.tag=${OKTETO_GIT_COMMIT}

@@ -1,0 +1,428 @@
+openapi: 3.0.2
+info:
+  title: Authentication API
+  version: 1.0.0
+servers:
+- url: /api/v1
+tags:
+- name: authentication
+  description: Describes the endpoints for authentication
+paths:
+  /register:
+    post:
+      tags:
+      - authentication
+      description: registers a user
+      operationId: register
+      requestBody:
+        description: Register a user
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRegistration'
+      responses:
+        "201":
+          description: User registered
+          headers:
+            Access-Control-Allow-Origin:
+              style: simple
+              explode: false
+              schema:
+                type: string
+            Content-Disposition:
+              style: simple
+              explode: false
+              schema:
+                type: string
+            Content-Type:
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserRegistration'
+        "400":
+          description: 400 invalid input
+          headers:
+            Access-Control-Allow-Origin:
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                x-content-type: application/json
+        "409":
+          description: 409 conflict response
+          headers:
+            Access-Control-Allow-Origin:
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                x-content-type: application/json
+        "500":
+          description: 500 response
+          headers:
+            Access-Control-Allow-Origin:
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                x-content-type: application/json
+      x-swagger-router-controller: AuthenticationController
+  /unregister:
+    post:
+      tags:
+      - authentication
+      description: unregister a user
+      operationId: unregister
+      requestBody:
+        description: Unregister a user
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        "200":
+          description: User unregistered
+          headers:
+            Access-Control-Allow-Origin:
+              style: simple
+              explode: false
+              schema:
+                type: string
+            Content-Disposition:
+              style: simple
+              explode: false
+              schema:
+                type: string
+            Content-Type:
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        "400":
+          description: 400 invalid input
+          headers:
+            Access-Control-Allow-Origin:
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                x-content-type: application/json
+        "500":
+          description: 500 response
+          headers:
+            Access-Control-Allow-Origin:
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                x-content-type: application/json
+      x-swagger-router-controller: AuthenticationController
+  /login:
+    post:
+      tags:
+      - authentication
+      description: login a user
+      operationId: login
+      requestBody:
+        description: Login a user
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        "200":
+          description: User Logged in
+          headers:
+            Access-Control-Allow-Origin:
+              style: simple
+              explode: false
+              schema:
+                type: string
+            Content-Disposition:
+              style: simple
+              explode: false
+              schema:
+                type: string
+            Content-Type:
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        "400":
+          description: 400 invalid input
+          headers:
+            Access-Control-Allow-Origin:
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                x-content-type: application/json
+        "500":
+          description: 500 response
+          headers:
+            Access-Control-Allow-Origin:
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                x-content-type: application/json
+      x-swagger-router-controller: AuthenticationController
+  /logout:
+    post:
+      tags:
+      - authentication
+      description: logout a user
+      operationId: logout
+      requestBody:
+        description: Logout a user
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        "200":
+          description: User Logged out
+          headers:
+            Access-Control-Allow-Origin:
+              style: simple
+              explode: false
+              schema:
+                type: string
+            Content-Disposition:
+              style: simple
+              explode: false
+              schema:
+                type: string
+            Content-Type:
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        "400":
+          description: 400 invalid input
+          headers:
+            Access-Control-Allow-Origin:
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                x-content-type: application/json
+        "500":
+          description: 500 response
+          headers:
+            Access-Control-Allow-Origin:
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                x-content-type: application/json
+      x-swagger-router-controller: AuthenticationController
+  /health:
+    get:
+      tags:
+      - authentication
+      description: Gets health of the service
+      operationId: getHealth
+      responses:
+        "200":
+          description: Service Health
+          headers:
+            Access-Control-Allow-Origin:
+              style: simple
+              explode: false
+              schema:
+                type: string
+            Content-Disposition:
+              style: simple
+              explode: false
+              schema:
+                type: string
+            Content-Type:
+              style: simple
+              explode: false
+              schema:
+                type: string
+      x-swagger-router-controller: AuthenticationController
+  /verify:
+    post:
+      tags:
+        - authentication
+      description: verify a user
+      operationId: verify
+      requestBody:
+        description: Verify a user
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        "200":
+          description: User is valid
+          headers:
+            Access-Control-Allow-Origin:
+              style: simple
+              explode: false
+              schema:
+                type: string
+            Content-Disposition:
+              style: simple
+              explode: false
+              schema:
+                type: string
+            Content-Type:
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        "400":
+          description: 400 invalid input
+          headers:
+            Access-Control-Allow-Origin:
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                x-content-type: application/json
+        "401":
+          description: 401 unauthorised
+          headers:
+            Access-Control-Allow-Origin:
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                x-content-type: application/json
+        "500":
+          description: 500 response
+          headers:
+            Access-Control-Allow-Origin:
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                x-content-type: application/json
+      x-swagger-router-controller: AuthenticationController
+components:
+  schemas:
+    UserRegistration:
+      required:
+      - age
+      - email
+      - firstName
+      - lastName
+      - password
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        age:
+          minimum: 16
+          type: integer
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        firstName: firstName
+        lastName: lastName
+        password: password
+        age: 16
+        email: email
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        firstName:
+          type: string
+        lastName:
+          type: string
+        age:
+          minimum: 16
+          type: integer
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+        token:
+          type: string
+      example:
+        firstName: firstName
+        lastName: lastName
+        password: password
+        id: 0
+        age: 16
+        email: email
+        token: token
