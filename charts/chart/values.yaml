@@ -12,7 +12,7 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
   env:
-    MONGO_URL: mongodb://mongodb.burkewi.svc.cluster.local:27017/userdb
+    MONGO_URL: mongodb://mongodb.bablybaqrtasri.svc.cluster.local:27017/userdb
 
 imagePullSecrets: []
 nameOverride: "authentication-service"
