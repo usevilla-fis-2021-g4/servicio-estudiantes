@@ -1158,12 +1158,12 @@ components:
       required:
         - age
         - firstName
-        - id
+        - _id
         - lastName
         - teacherId
       type: object
       properties:
-        id:
+        _id:
           type: integer
           format: int64
         firstName:
@@ -1195,7 +1195,7 @@ components:
           - code: code
             teacherId: 5
             description: description
-        id: 0
+        id: 1
         grades:
           - studentId: 5
             teacherId: 2
