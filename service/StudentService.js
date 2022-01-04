@@ -14,7 +14,7 @@ const servicesConfig = require('../config/servicesConfig');
 exports.assignGradesToStudent = function(body,studentId) {
   return new Promise(async function(resolve, reject) {
      try {
-          let student = await db.Student.findOne({id: studentId}).exec();
+          let student = await db.Student.findOne({_id: studentId}).exec();
 
               if (!student) {
                   reject([null, 400]);
@@ -71,7 +71,7 @@ exports.assignSubjectToStudent = function(body,studentId) {
   return new Promise(async function(resolve, reject) {
       try {
           let subjects = [];
-          let student = await db.Student.findOne({id: studentId}).exec();
+          let student = await db.Student.findOne({_id: studentId}).exec();
           if (!student) {
               reject([null, 400]);
           } else {
@@ -125,14 +125,14 @@ exports.assignSubjectToStudent = function(body,studentId) {
 exports.createStudent = function(body) {
   return new Promise(function(resolve, reject) {
       const student = new db.Student({
-            id: body.id,
+            _id: body._id,
             firstName: body.firstName,
             lastName: body.lastName,
             age: body.age,
             teacherId: body.teacherId
       });
 
-     exports.getStudent(body.id)
+     exports.getStudent(body._id)
          .then(function (response) {
              // already have a student
              reject([null, 405]);
@@ -167,7 +167,7 @@ exports.createStudent = function(body) {
 exports.deleteASubjectForStudent = function(studentId,subjectCode) {
     return new Promise(async function(resolve, reject) {
         try {
-            let student = await db.Student.findOne({id: studentId}).exec();
+            let student = await db.Student.findOne({_id: studentId}).exec();
             if (!student) {
                 reject([null, 400]);
             }
@@ -202,7 +202,7 @@ exports.deleteStudent = function(studentId) {
     return new Promise(async function(resolve, reject) {
 
         try {
-            let res = await db.Student.findOneAndRemove({id: studentId}).exec();
+            let res = await db.Student.findOneAndRemove({_id: studentId}).exec();
             if (res) {
                 resolve([res, 200]);
             }
@@ -226,7 +226,7 @@ exports.deleteStudent = function(studentId) {
 exports.deleteGradeForStudentSubject = function(studentId,subjectCode) {
     return new Promise(async function(resolve, reject) {
         try {
-            let student = await db.Student.findOne({id: studentId}).exec();
+            let student = await db.Student.findOne({_id: studentId}).exec();
                 if (!student) {
                     reject([null, 400]);
                 }
@@ -260,7 +260,7 @@ exports.deleteGradeForStudentSubject = function(studentId,subjectCode) {
 exports.getGradeForStudentSubject = function(studentId,subjectCode) {
     return new Promise(async function(resolve, reject) {
         try {
-            let student = await db.Student.findOne({id: studentId}).exec();
+            let student = await db.Student.findOne({_id: studentId}).exec();
             if (!student) {
                 reject([null, 400]);
             }
@@ -289,7 +289,7 @@ exports.getGradeForStudentSubject = function(studentId,subjectCode) {
  **/
 exports.getStudent = function(studentId) {
     return new Promise(function(resolve, reject) {
-        let query = { id: studentId };
+        let query = { _id: studentId };
         db.Student.findOne(query).then( res => {
             res ? resolve([res]) : reject([null, 404]);
         })
@@ -327,7 +327,7 @@ exports.getStudents = function() {
 exports.getSubjectForStudent = function(studentId,subjectCode) {
     return new Promise(async function(resolve, reject) {
         try {
-            let student = await db.Student.findOne({id: studentId}).exec();
+            let student = await db.Student.findOne({_id: studentId}).exec();
             if (!student) {
                 reject([null, 400]);
             }
@@ -358,7 +358,7 @@ exports.getSubjectForStudent = function(studentId,subjectCode) {
 exports.updateStudent = function(body, studentId) {
     return new Promise(async function(resolve, reject) {
         try {
-             let student = await db.Student.findOne({id: studentId}).exec();
+             let student = await db.Student.findOne({_id: studentId}).exec();
             if (!student) {
                 reject([null, 400]);
             } else {
@@ -407,7 +407,7 @@ exports.updateStudent = function(body, studentId) {
 exports.updateSubjectAssignmentForStudent = function(body, studentId,subjectCode) {
     return new Promise(async function(resolve, reject) {
         try {
-            let student = await db.Student.findOne({id: studentId}).exec();
+            let student = await db.Student.findOne({_id: studentId}).exec();
             if (!student) {
                 reject([null, 400]);
             } else {
@@ -454,7 +454,7 @@ exports.updateSubjectAssignmentForStudent = function(body, studentId,subjectCode
 exports.updateGradeForStudentSubject = function(body, studentId, subjectCode) {
     return new Promise(async function (resolve, reject) {
         try {
-            let student = await db.Student.findOne({id: studentId}).exec();
+            let student = await db.Student.findOne({_id: studentId}).exec();
             if (!student) {
                 reject([null, 400]);
             } else {
@@ -499,4 +499,3 @@ exports.getHealth = function() {
         resolve();
     });
 }
-
