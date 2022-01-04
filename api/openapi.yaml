@@ -1195,7 +1195,7 @@ components:
           - code: code
             teacherId: 5
             description: description
-        id: 1
+        _id: 1
         grades:
           - studentId: 5
             teacherId: 2
