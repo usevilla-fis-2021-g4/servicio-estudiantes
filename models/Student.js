@@ -1,6 +1,6 @@
 module.exports = mongoose => {
     const studentSchema = mongoose.Schema({
-            id: Number,
+            _id: Number,
             firstName: String,
             lastName: String,
             age: Number,
@@ -20,14 +20,6 @@ module.exports = mongoose => {
             timestamps: true
         }
     );
-
-    studentSchema.method("toJSON", function() {
-        const { __v, _id, ...object } = this.toObject();
-        object.id = _id;
-        return object;
-    });
-
-    studentSchema.index({ id: 1}, { unique: true })
 
     return mongoose.model("Student", studentSchema);
 };
