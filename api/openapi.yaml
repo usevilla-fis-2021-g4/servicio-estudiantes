@@ -1,0 +1,1276 @@
+openapi: 3.0.2
+info:
+  title: Student API
+  version: 1.0.0
+servers:
+  - url: /api/v1
+tags:
+  - name: student
+    description: Describes the endpoints for students
+paths:
+  /students:
+    get:
+      tags:
+        - student
+      description: Gets students
+      operationId: getStudents
+      parameters:
+        - name: X-User-Id
+          in: header
+          required: true
+          style: simple
+          explode: false
+          schema:
+            $ref: '#/components/headers/xUserId'
+        - name: X-Auth-Token
+          in: header
+          required: true
+          style: simple
+          explode: false
+          schema:
+            $ref: '#/components/headers/xAuthToken'
+      responses:
+        "200":
+          description: Student exists response
+          headers:
+            Access-Control-Allow-Origin:
+              style: simple
+              explode: false
+              schema:
+                type: string
+            Content-Disposition:
+              style: simple
+              explode: false
+              schema:
+                type: string
+            Content-Type:
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Student'
+                x-content-type: application/json
+        "404":
+          description: 404 response
+          headers:
+            Access-Control-Allow-Origin:
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                x-content-type: application/json
+        "500":
+          description: 500 response
+          headers:
+            Access-Control-Allow-Origin:
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                x-content-type: application/json
+      x-swagger-router-controller: StudentController
+    post:
+      tags:
+        - student
+      description: Creates a studeånt
+      operationId: createStudent
+      parameters:
+        - name: X-User-Id
+          in: header
+          required: true
+          style: simple
+          explode: false
+          schema:
+            $ref: '#/components/headers/xUserId'
+        - name: X-Auth-Token
+          in: header
+          required: true
+          style: simple
+          explode: false
+          schema:
+            $ref: '#/components/headers/xAuthToken'
+      requestBody:
+        description: "Create student: student ID, name, teacher ID"
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Student'
+      responses:
+        "201":
+          description: Student created response
+          headers:
+            Access-Control-Allow-Origin:
+              style: simple
+              explode: false
+              schema:
+                type: string
+            Content-Disposition:
+              style: simple
+              explode: false
+              schema:
+                type: string
+            Content-Type:
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Student'
+        "409":
+          description: 409 conflict response
+          headers:
+            Access-Control-Allow-Origin:
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                x-content-type: application/json
+        "500":
+          description: 500 response
+          headers:
+            Access-Control-Allow-Origin:
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                x-content-type: application/json
+      x-swagger-router-controller: StudentController
+  /students/{studentId}:
+    get:
+      tags:
+        - student
+      description: Gets a specific student
+      operationId: getStudent
+      parameters:
+        - name: X-User-Id
+          in: header
+          required: true
+          style: simple
+          explode: false
+          schema:
+            $ref: '#/components/headers/xUserId'
+        - name: X-Auth-Token
+          in: header
+          required: true
+          style: simple
+          explode: false
+          schema:
+            $ref: '#/components/headers/xAuthToken'
+        - name: studentId
+          in: path
+          description: The ID of the student
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: Student found
+          headers:
+            Access-Control-Allow-Origin:
+              style: simple
+              explode: false
+              schema:
+                type: string
+            Content-Disposition:
+              style: simple
+              explode: false
+              schema:
+                type: string
+            Content-Type:
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Student'
+        "404":
+          description: 404 response
+          headers:
+            Access-Control-Allow-Origin:
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                x-content-type: application/json
+        "500":
+          description: 500 response
+          headers:
+            Access-Control-Allow-Origin:
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                x-content-type: application/json
+      x-swagger-router-controller: StudentController
+    put:
+      tags:
+        - student
+      description: Updates a specific student
+      operationId: updateStudent
+      parameters:
+        - name: X-User-Id
+          in: header
+          required: true
+          style: simple
+          explode: false
+          schema:
+            $ref: '#/components/headers/xUserId'
+        - name: X-Auth-Token
+          in: header
+          required: true
+          style: simple
+          explode: false
+          schema:
+            $ref: '#/components/headers/xAuthToken'
+        - name: studentId
+          in: path
+          description: The ID of the student
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: Update a student
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Student'
+      responses:
+        "200":
+          description: Student updated
+          headers:
+            Access-Control-Allow-Origin:
+              style: simple
+              explode: false
+              schema:
+                type: string
+            Content-Disposition:
+              style: simple
+              explode: false
+              schema:
+                type: string
+            Content-Type:
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Student'
+        "404":
+          description: 404 response
+          headers:
+            Access-Control-Allow-Origin:
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                x-content-type: application/json
+        "500":
+          description: 500 response
+          headers:
+            Access-Control-Allow-Origin:
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                x-content-type: application/json
+      x-swagger-router-controller: StudentController
+    delete:
+      tags:
+        - student
+      description: Deletes a specific student
+      operationId: deleteStudent
+      parameters:
+        - name: X-User-Id
+          in: header
+          required: true
+          style: simple
+          explode: false
+          schema:
+            $ref: '#/components/headers/xUserId'
+        - name: X-Auth-Token
+          in: header
+          required: true
+          style: simple
+          explode: false
+          schema:
+            $ref: '#/components/headers/xAuthToken'
+        - name: studentId
+          in: path
+          description: The ID of the student
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: Student deleted
+          headers:
+            Access-Control-Allow-Origin:
+              style: simple
+              explode: false
+              schema:
+                type: string
+            Content-Disposition:
+              style: simple
+              explode: false
+              schema:
+                type: string
+            Content-Type:
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Student'
+        "404":
+          description: 404 response
+          headers:
+            Access-Control-Allow-Origin:
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                x-content-type: application/json
+        "500":
+          description: 500 response
+          headers:
+            Access-Control-Allow-Origin:
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                x-content-type: application/json
+      x-swagger-router-controller: StudentController
+  /students/{studentId}/subjects:
+    post:
+      tags:
+        - student
+      description: Assign a subject to a student
+      operationId: assignSubjectToStudent
+      parameters:
+        - name: X-User-Id
+          in: header
+          required: true
+          style: simple
+          explode: false
+          schema:
+            $ref: '#/components/headers/xUserId'
+        - name: X-Auth-Token
+          in: header
+          required: true
+          style: simple
+          explode: false
+          schema:
+            $ref: '#/components/headers/xAuthToken'
+        - name: studentId
+          in: path
+          description: The ID of the student
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: "Assign subjects to the student: identification, subject code,\
+          \ teacher identification "
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/SubjectAssignment'
+        required: true
+      responses:
+        "200":
+          description: Successfully assigned subject to student
+          headers:
+            Access-Control-Allow-Origin:
+              style: simple
+              explode: false
+              schema:
+                type: string
+            Content-Disposition:
+              style: simple
+              explode: false
+              schema:
+                type: string
+            Content-Type:
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Student'
+        "404":
+          description: 404 response
+          headers:
+            Access-Control-Allow-Origin:
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                x-content-type: application/json
+        "500":
+          description: 500 response
+          headers:
+            Access-Control-Allow-Origin:
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                x-content-type: application/json
+      x-swagger-router-controller: StudentController
+  /students/{studentId}/subjects/{subjectCode}:
+    get:
+      tags:
+        - student
+      description: Gets a specific subject for a student
+      operationId: getSubjectForStudent
+      parameters:
+        - name: X-User-Id
+          in: header
+          required: true
+          style: simple
+          explode: false
+          schema:
+            $ref: '#/components/headers/xUserId'
+        - name: X-Auth-Token
+          in: header
+          required: true
+          style: simple
+          explode: false
+          schema:
+            $ref: '#/components/headers/xAuthToken'
+        - name: studentId
+          in: path
+          description: The ID of the student
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+        - name: subjectCode
+          in: path
+          description: The code of the subject
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Subject found
+          headers:
+            Access-Control-Allow-Origin:
+              style: simple
+              explode: false
+              schema:
+                type: string
+            Content-Disposition:
+              style: simple
+              explode: false
+              schema:
+                type: string
+            Content-Type:
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Student'
+        "404":
+          description: 404 response
+          headers:
+            Access-Control-Allow-Origin:
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                x-content-type: application/json
+        "500":
+          description: 500 response
+          headers:
+            Access-Control-Allow-Origin:
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                x-content-type: application/json
+      x-swagger-router-controller: StudentController
+    put:
+      tags:
+        - student
+      description: Updates a specific subject assignment for a student
+      operationId: updateSubjectAssignmentForStudent
+      parameters:
+        - name: X-User-Id
+          in: header
+          required: true
+          style: simple
+          explode: false
+          schema:
+            $ref: '#/components/headers/xUserId'
+        - name: X-Auth-Token
+          in: header
+          required: true
+          style: simple
+          explode: false
+          schema:
+            $ref: '#/components/headers/xAuthToken'
+        - name: studentId
+          in: path
+          description: The ID of the student
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+        - name: subjectCode
+          in: path
+          description: The code of the subject
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+      requestBody:
+        description: Update a subject assignment
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Subject'
+      responses:
+        "200":
+          description: Student updated
+          headers:
+            Access-Control-Allow-Origin:
+              style: simple
+              explode: false
+              schema:
+                type: string
+            Content-Disposition:
+              style: simple
+              explode: false
+              schema:
+                type: string
+            Content-Type:
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Student'
+        "404":
+          description: 404 response
+          headers:
+            Access-Control-Allow-Origin:
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                x-content-type: application/json
+        "500":
+          description: 500 response
+          headers:
+            Access-Control-Allow-Origin:
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                x-content-type: application/json
+      x-swagger-router-controller: StudentController
+    delete:
+      tags:
+        - student
+      description: Deletes a subject assignment for a specific student
+      operationId: deleteASubjectForStudent
+      parameters:
+        - name: X-User-Id
+          in: header
+          required: true
+          style: simple
+          explode: false
+          schema:
+            $ref: '#/components/headers/xUserId'
+        - name: X-Auth-Token
+          in: header
+          required: true
+          style: simple
+          explode: false
+          schema:
+            $ref: '#/components/headers/xAuthToken'
+        - name: studentId
+          in: path
+          description: The ID of the student
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+        - name: subjectCode
+          in: path
+          description: The code of the subject
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Student deleted
+          headers:
+            Access-Control-Allow-Origin:
+              style: simple
+              explode: false
+              schema:
+                type: string
+            Content-Disposition:
+              style: simple
+              explode: false
+              schema:
+                type: string
+            Content-Type:
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Student'
+        "404":
+          description: 404 response
+          headers:
+            Access-Control-Allow-Origin:
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                x-content-type: application/json
+        "500":
+          description: 500 response
+          headers:
+            Access-Control-Allow-Origin:
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                x-content-type: application/json
+      x-swagger-router-controller: StudentController
+  /students/{studentId}/grades:
+    post:
+      tags:
+        - student
+      description: Assign grades to a student
+      operationId: assignGradesToStudent
+      parameters:
+        - name: X-User-Id
+          in: header
+          required: true
+          style: simple
+          explode: false
+          schema:
+            $ref: '#/components/headers/xUserId'
+        - name: X-Auth-Token
+          in: header
+          required: true
+          style: simple
+          explode: false
+          schema:
+            $ref: '#/components/headers/xAuthToken'
+        - name: studentId
+          in: path
+          description: The ID of the student
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: "Assign grades: student ID, subject code, grade, teacher ID"
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Grade'
+        required: true
+      responses:
+        "200":
+          description: 200 response
+          headers:
+            Access-Control-Allow-Origin:
+              style: simple
+              explode: false
+              schema:
+                type: string
+            Content-Disposition:
+              style: simple
+              explode: false
+              schema:
+                type: string
+            Content-Type:
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Student'
+        "404":
+          description: 404 response
+          headers:
+            Access-Control-Allow-Origin:
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                x-content-type: application/json
+        "500":
+          description: 500 response
+          headers:
+            Access-Control-Allow-Origin:
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                x-content-type: application/json
+      x-swagger-router-controller: StudentController
+  /students/{studentId}/grades/{subjectCode}:
+    get:
+      tags:
+        - student
+      description: returns a grade the student has for assigned subject
+      operationId: getGradeForStudentSubject
+      parameters:
+        - name: X-User-Id
+          in: header
+          required: true
+          style: simple
+          explode: false
+          schema:
+            $ref: '#/components/headers/xUserId'
+        - name: X-Auth-Token
+          in: header
+          required: true
+          style: simple
+          explode: false
+          schema:
+            $ref: '#/components/headers/xAuthToken'
+        - name: studentId
+          in: path
+          description: The ID of the student
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+        - name: subjectCode
+          in: path
+          description: The code of the subject
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 200 response
+          headers:
+            Access-Control-Allow-Origin:
+              style: simple
+              explode: false
+              schema:
+                type: string
+            Content-Disposition:
+              style: simple
+              explode: false
+              schema:
+                type: string
+            Content-Type:
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Grade'
+                x-content-type: application/json
+        "404":
+          description: 404 response
+          headers:
+            Access-Control-Allow-Origin:
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                x-content-type: application/json
+        "500":
+          description: 500 response
+          headers:
+            Access-Control-Allow-Origin:
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                x-content-type: application/json
+      x-swagger-router-controller: StudentController
+    put:
+      tags:
+        - student
+      description: updates a grade the student has for assigned subject
+      operationId: updatesGradeForStudentSubject
+      parameters:
+        - name: X-User-Id
+          in: header
+          required: true
+          style: simple
+          explode: false
+          schema:
+            $ref: '#/components/headers/xUserId'
+        - name: X-Auth-Token
+          in: header
+          required: true
+          style: simple
+          explode: false
+          schema:
+            $ref: '#/components/headers/xAuthToken'
+        - name: studentId
+          in: path
+          description: The ID of the student
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+        - name: subjectCode
+          in: path
+          description: The code of the subject
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+      requestBody:
+        description: Update a grade
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Grade'
+      responses:
+        "200":
+          description: 200 response
+          headers:
+            Access-Control-Allow-Origin:
+              style: simple
+              explode: false
+              schema:
+                type: string
+            Content-Disposition:
+              style: simple
+              explode: false
+              schema:
+                type: string
+            Content-Type:
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Grade'
+                x-content-type: application/json
+        "404":
+          description: 404 response
+          headers:
+            Access-Control-Allow-Origin:
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                x-content-type: application/json
+        "500":
+          description: 500 response
+          headers:
+            Access-Control-Allow-Origin:
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                x-content-type: application/json
+      x-swagger-router-controller: StudentController
+    delete:
+      tags:
+        - student
+      description: deletes a grade the student has for assigned subject
+      operationId: deleteGradeForStudentSubject
+      parameters:
+        - name: X-User-Id
+          in: header
+          required: true
+          style: simple
+          explode: false
+          schema:
+            $ref: '#/components/headers/xUserId'
+        - name: X-Auth-Token
+          in: header
+          required: true
+          style: simple
+          explode: false
+          schema:
+            $ref: '#/components/headers/xAuthToken'
+        - name: studentId
+          in: path
+          description: The ID of the student
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+        - name: subjectCode
+          in: path
+          description: The code of the subject
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 200 response
+          headers:
+            Access-Control-Allow-Origin:
+              style: simple
+              explode: false
+              schema:
+                type: string
+            Content-Disposition:
+              style: simple
+              explode: false
+              schema:
+                type: string
+            Content-Type:
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Grade'
+                x-content-type: application/json
+        "404":
+          description: 404 response
+          headers:
+            Access-Control-Allow-Origin:
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                x-content-type: application/json
+        "500":
+          description: 500 response
+          headers:
+            Access-Control-Allow-Origin:
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                x-content-type: application/json
+      x-swagger-router-controller: StudentController
+  /health:
+    get:
+      tags:
+        - student
+      description: Gets health of the service
+      operationId: getHealth
+      responses:
+        "200":
+          description: Service Health
+          headers:
+            Access-Control-Allow-Origin:
+              style: simple
+              explode: false
+              schema:
+                type: string
+            Content-Disposition:
+              style: simple
+              explode: false
+              schema:
+                type: string
+            Content-Type:
+              style: simple
+              explode: false
+              schema:
+                type: string
+      x-swagger-router-controller: StudentController
+components:
+  schemas:
+    Student:
+      required:
+        - age
+        - firstName
+        - _id
+        - lastName
+        - teacherId
+      type: object
+      properties:
+        _id:
+          type: integer
+          format: int64
+        firstName:
+          type: string
+        lastName:
+          type: string
+        age:
+          minimum: 16
+          type: integer
+        teacherId:
+          type: integer
+          format: int64
+        subjects:
+          type: array
+          items:
+            $ref: '#/components/schemas/Subject'
+        grades:
+          type: array
+          items:
+            $ref: '#/components/schemas/Grade'
+      example:
+        firstName: firstName
+        lastName: lastName
+        teacherId: 1
+        subjects:
+          - code: code
+            teacherId: 5
+            description: description
+          - code: code
+            teacherId: 5
+            description: description
+        _id: 1
+        grades:
+          - studentId: 5
+            teacherId: 2
+            grade: grade
+            subjectCode: subjectCode
+          - studentId: 5
+            teacherId: 2
+            grade: grade
+            subjectCode: subjectCode
+        age: 16
+    Subject:
+      required:
+        - code
+        - teacherId
+      type: object
+      properties:
+        code:
+          type: string
+        description:
+          type: string
+        teacherId:
+          type: integer
+          format: int64
+      example:
+        code: code
+        teacherId: 5
+        description: description
+    SubjectAssignment:
+      required:
+        - code
+        - studentId
+        - teacherId
+      type: object
+      properties:
+        code:
+          type: string
+        studentId:
+          type: integer
+          format: int64
+        teacherId:
+          type: integer
+          format: int64
+    Grade:
+      required:
+        - grade
+        - studentId
+        - subjectCode
+        - teacherId
+      type: object
+      properties:
+        studentId:
+          type: integer
+          format: int64
+        subjectCode:
+          type: string
+        grade:
+          type: string
+        teacherId:
+          type: integer
+          format: int64
+      example:
+        studentId: 5
+        teacherId: 2
+        grade: grade
+        subjectCode: subjectCode
+  headers:
+    xUserId:
+      style: simple
+      explode: false
+      schema:
+        type: string
+        description: user id e.g. email address
+    xAuthToken:
+      style: simple
+      explode: false
+      schema:
+        type: string
+        description: authentication token obtained from the authentication service

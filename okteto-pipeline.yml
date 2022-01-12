@@ -1,0 +1,4 @@
+deploy:
+ - okteto build -t okteto.dev/student-service:${OKTETO_GIT_COMMIT} .
+ - helm upgrade --install mongodb charts/mongodb/
+ - helm upgrade --install student-service charts/chart/ --set image.tag=${OKTETO_GIT_COMMIT}

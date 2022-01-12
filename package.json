@@ -1,0 +1,34 @@
+{
+  "name": "student-service",
+  "version": "1.0.0",
+  "description": "This is the student service that is responsible for handling all operations related to students",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/usevilla-fis-2021-g4/servicio-estudiantes.git"
+  },
+  "homepage": "https://github.com/usevilla-fis-2021-g4/servicio-estudiantes",
+  "scripts": {
+    "prestart": "npm install",
+    "start": "node index.js"
+  },
+  "keywords": [
+    "swagger"
+  ],
+  "license": "Unlicense",
+  "private": true,
+  "dependencies": {
+    "axios": "^0.24.0",
+    "connect": "^3.2.0",
+    "js-yaml": "^3.3.0",
+    "mongodb": "^4.2.0",
+    "mongoose": "^6.0.13",
+    "oas3-tools": "^2.2.3"
+  },
+  "devDependencies": {
+    "chai": "^4.3.4",
+    "express": "^4.17.1",
+    "mocha": "^9.1.3",
+    "supertest": "^6.1.6"
+  }
+}
