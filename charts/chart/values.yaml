@@ -12,9 +12,9 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
   env:
-    MONGO_URL: mongodb://mongodb.bablybaqrtasri.svc.cluster.local:27017/studentdb
-    AUTHENTICATION_SERVICE_URL: https://authentication-service-bablybaqrtasri.cloud.okteto.net/api/v1/verify
-    SUBJECT_SERVICE_URL: https://subject-service-bablybaqrtasri.cloud.okteto.net/api/v1/subjects
+    MONGO_URL: mongodb://mongodb.jjpalmacosta.svc.cluster.local:27017/studentdb
+    AUTHENTICATION_SERVICE_URL: https://authentication-service-jjpalmacosta.cloud.okteto.net/api/v1/verify
+    SUBJECT_SERVICE_URL: https://subject-service-jjpalmacosta.cloud.okteto.net/api/v1/subjects
 
 
 imagePullSecrets: []
